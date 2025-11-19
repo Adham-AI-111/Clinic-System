@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'register',
     'patient',
     'doctor',
+    'phonenumber_field',
+
 ]
 
 MIDDLEWARE = [
@@ -64,11 +66,16 @@ WSGI_APPLICATION = 'Clinic_System.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'clinic_db',
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '5433',
     }
 }
 
+AUTH_USER_MODEL = 'doctor.User' # to replace the default User model by my custom User mode, the authenticate method applying on it
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
